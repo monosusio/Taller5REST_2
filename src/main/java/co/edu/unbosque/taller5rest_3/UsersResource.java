@@ -23,6 +23,9 @@ public class UsersResource {
     static final String USER = "postgres";
     static final String PASS = "Santuario11";
 
+
+
+    
     @GET
     @Produces("application/json")
     public Response hello() {
