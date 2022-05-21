@@ -16,7 +16,7 @@ public class UsersService {
     
     public UsersService(Connection conn) {this.conn = conn;}
 
-    public void listUsers() {
+    public List<Usuario> listUsers() {
         // Object for handling SQL statement
         Statement stmt = null;
 
@@ -64,5 +64,7 @@ public class UsersService {
                 se.printStackTrace();
             }
         }
+
+        return usuarioApps;
     }
 }
