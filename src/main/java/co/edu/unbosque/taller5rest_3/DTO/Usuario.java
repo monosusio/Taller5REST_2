@@ -2,13 +2,11 @@ package co.edu.unbosque.taller5rest_3.DTO;
 
 public class Usuario {
 
-    private Integer user_id;
     private String username;
     private String password;
     private String role;
 
-    public Usuario(Integer user_id, String username, String password, String role) {
-        this.user_id = user_id;
+    public Usuario(String username, String password, String role) {
         this.username = username;
         this.password = password;
         this.role = role;
@@ -36,14 +34,6 @@ public class Usuario {
 
     public void setRole(String role) {
         this.role = role;
-    }
-
-    public Integer getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(Integer user_id) {
-        this.user_id = user_id;
     }
 
     @Override

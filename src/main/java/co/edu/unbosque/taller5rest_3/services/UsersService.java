@@ -2,16 +2,12 @@ package co.edu.unbosque.taller5rest_3.services;
 
 import co.edu.unbosque.taller5rest_3.DTO.Usuario;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UsersService {
 
-    // Objects for handling connection
     private Connection conn;
     
     public UsersService(Connection conn) {this.conn = conn;}
@@ -33,17 +29,16 @@ public class UsersService {
             // Reading data from result set row by row
             while (rs.next()) {
                 // Extracting row values by column name
-                int user_id = rs.getInt("user_id");
                 String username = rs.getString("username");
                 String password = rs.getString("password");
                 String role = rs.getString("role");
 
                 // Creating a new UserApp class instance and adding it to the array list
-                usuarioApps.add(new Usuario(user_id, username, password, role));
+                usuarioApps.add(new Usuario(username, password, role));
             }
 
             // Printing results
-            System.out.println("ID | Username | Password | Role");
+            System.out.println("Username | Password | Role");
             for (Usuario usuario : usuarioApps) {
                 System.out.println(usuario.toString());
             }
@@ -66,5 +61,42 @@ public class UsersService {
         }
 
         return usuarioApps;
+    }
+
+    public Connection connect() throws SQLException {
+        String DB_URL = "jdbc:postgresql://localhost/postgres";
+        String USER = "postgres";
+        String PASS = "Santuario11";
+        return DriverManager.getConnection(DB_URL, USER, PASS);
+    }
+
+    public long insertuser(Usuario user){
+
+        String SQL= "INSERT INTO usuario(username, password, role)"+"VALUES(?,?,?)";
+        long id=0;
+        try (Connection conn = connect();
+             PreparedStatement pstmt = conn.prepareStatement(SQL,
+                     Statement.RETURN_GENERATED_KEYS)) {
+
+            pstmt.setString(1,user.getUsername());
+            pstmt.setString(2, user.getPassword());
+            pstmt.setString(3, user.getRole());
+            int affectedRows = pstmt.executeUpdate();
+
+            if (affectedRows > 0) {
+
+                try (ResultSet rs = pstmt.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        id = rs.getLong(1);
+                    }
+                } catch (SQLException ex) {
+                    System.out.println(ex.getMessage());
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return id;
+
     }
 }
