@@ -11,10 +11,10 @@ import jakarta.ws.rs.core.UriBuilder;
 
 import java.io.IOException;
 import java.net.URI;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Path("/users")
 public class UsersResource {
@@ -72,11 +72,12 @@ public class UsersResource {
         return Response.ok().entity(users).build();
     }
 
-    @GET
+    /*@POST
     @Path("/found")
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
+    //@Produces(MediaType.APPLICATION_JSON)
+    //@Consumes(MediaType.APPLICATION_JSON)
     public Response found(Usuario user){
+
         UsersService bass =new UsersService(conn);
         Usuario n=new Usuario(null,null,null);
         String username_n=user.getUsername();
@@ -110,7 +111,51 @@ public class UsersResource {
                     .build();
         }
 
+    }*/
+
+
+    @POST
+    @Path("/found")
+    public Response found (@FormParam("username")String name,@FormParam("password")String password) throws SQLException {
+
+        Usuario usuario = null;
+        Connection connection = null;
+        List<Usuario> list = new ArrayList<>();
+        try {
+            Class.forName(JDBC_DRIVER);
+            connection = DriverManager.getConnection(DB_URL, USER, PASS);
+            Statement statement = connection.createStatement();
+            String query = "SELECT  * FROM Usuario";
+            ResultSet result = statement.executeQuery(query);
+            while (result.next()) {
+
+                String username = result.getString("username");
+                String key = result.getString("password");
+                String role = result.getString("role");
+                /*if (Optional.ofNullable(role).orElse("Shopper").equalsIgnoreCase("Artist"))
+                    list.add(new Artist(name, password, ""));
+                else
+                    list.add(new Shopper(name, password, 0));
+            }*/
+                list.forEach(x -> System.out.println(x));
+                usuario = list.stream()
+                        .filter(x -> x.getUsername().equals(username) && x.getPassword().equals(password))
+                        .findFirst()
+                        .orElse(null);
+
+                System.out.println("sexo con monos");
+            }
+            statement.close();
+            connection.close();
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+
+        }
+
+        return null;
     }
+
     /*@GET
     @Path("/{username}")
     @Produces(MediaType.APPLICATION_JSON)
