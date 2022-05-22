@@ -13,10 +13,8 @@ public class UsersService {
     public UsersService(Connection conn) {this.conn = conn;}
 
     public List<Usuario> listUsers() {
-        // Object for handling SQL statement
         Statement stmt = null;
 
-        // Data structure to map results from database
         List<Usuario> usuarioApps = new ArrayList<Usuario>();
 
         try {
@@ -66,7 +64,7 @@ public class UsersService {
     public Connection connect() throws SQLException {
         String DB_URL = "jdbc:postgresql://localhost/postgres";
         String USER = "postgres";
-        String PASS = "Santuario11";
+        String PASS = "monosusio";
         return DriverManager.getConnection(DB_URL, USER, PASS);
     }
 

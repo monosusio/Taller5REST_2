@@ -18,6 +18,8 @@ var data = {
     "password": document.getElementById("contraseña").value,
     "rol": document.getElementById("rol").value,
 
+
+    
 };
 
 //const myHeaders = new Headers();
