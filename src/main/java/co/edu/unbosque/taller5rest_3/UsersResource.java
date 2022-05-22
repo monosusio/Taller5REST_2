@@ -154,8 +154,7 @@ public class UsersResource {
             @FormParam("password") String password,
             @FormParam("role") String role
             ){
-
-
+        
             UsersService usersService = new UsersService(conn);
 
         Usuario user_n=new Usuario(username, password, role);
