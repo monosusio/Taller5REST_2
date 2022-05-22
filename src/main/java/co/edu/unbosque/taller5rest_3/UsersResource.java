@@ -72,12 +72,12 @@ public class UsersResource {
         return Response.ok().entity(users).build();
     }
 
-    /*@POST
-    @Path("/found")
-    //@Produces(MediaType.APPLICATION_JSON)
-    //@Consumes(MediaType.APPLICATION_JSON)
+    @POST
+    @Path("/found1")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
     public Response found(Usuario user){
-
+ System.out.println("entrando al metodo found");
         UsersService bass =new UsersService(conn);
         Usuario n=new Usuario(null,null,null);
         String username_n=user.getUsername();
@@ -100,7 +100,7 @@ public class UsersResource {
             System.out.println("Dentro del if");
 
             return Response.ok()
-                    .entity(user)
+                    .entity(user_n)
                     .build();
 
         } else {
@@ -111,10 +111,10 @@ public class UsersResource {
                     .build();
         }
 
-    }*/
+    }
 
 
-    @POST
+   /* @POST
     @Path("/found")
     public Response found (@FormParam("username")String name,@FormParam("password")String password) throws SQLException {
 
@@ -127,16 +127,17 @@ public class UsersResource {
             Statement statement = connection.createStatement();
             String query = "SELECT  * FROM Usuario";
             ResultSet result = statement.executeQuery(query);
+            System.out.println("sexo con monos, la secuela");
             while (result.next()) {
 
                 String username = result.getString("username");
                 String key = result.getString("password");
                 String role = result.getString("role");
-                /*if (Optional.ofNullable(role).orElse("Shopper").equalsIgnoreCase("Artist"))
+                if (Optional.ofNullable(role).orElse("Shopper").equalsIgnoreCase("Artist"))
                     list.add(new Artist(name, password, ""));
                 else
                     list.add(new Shopper(name, password, 0));
-            }*/
+            }
                 list.forEach(x -> System.out.println(x));
                 usuario = list.stream()
                         .filter(x -> x.getUsername().equals(username) && x.getPassword().equals(password))
@@ -153,8 +154,10 @@ public class UsersResource {
 
         }
 
-        return null;
-    }
+        return Response.ok()
+                .entity(usuario)
+                .build();
+    }*/
 
     /*@GET
     @Path("/{username}")
