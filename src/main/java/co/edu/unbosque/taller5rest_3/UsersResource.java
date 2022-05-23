@@ -79,6 +79,7 @@ public class UsersResource {
     public Response found(Usuario user){
  System.out.println("entrando al metodo found");
 
+
         UsersService bass =new UsersService(conn);
         Usuario n=new Usuario(null,null,null);
         String username_n=user.getUsername();
@@ -91,6 +92,11 @@ public class UsersResource {
                 .filter(u -> u.getUsername().equals(username_n) && u.getPassword().equals(password_n))
                 .findFirst()
                 .orElse(null);
+
+       System.out.println("este  es el username"+user_n.getUsername());
+       System.out.println("este  es el password"+user_n.getPassword());
+       System.out.println("este  es el role"+user_n.getRole());
+
         System.out.println("Fuera del if");
 
         if (user_n != null) {
