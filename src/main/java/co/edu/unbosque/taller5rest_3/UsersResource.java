@@ -22,7 +22,7 @@ public class UsersResource {
     static final String JDBC_DRIVER = "org.postgresql.Driver";
     static final String DB_URL = "jdbc:postgresql://localhost/postgres";
     static final String USER = "postgres";
-    static final String PASS = "monosusio";
+    static final String PASS = "Santuario11";
     Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
 
@@ -73,11 +73,12 @@ public class UsersResource {
     }
 
     @POST
-    @Path("/found1")
+    @Path("/found")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response found(Usuario user){
  System.out.println("entrando al metodo found");
+
         UsersService bass =new UsersService(conn);
         Usuario n=new Usuario(null,null,null);
         String username_n=user.getUsername();
@@ -200,7 +201,7 @@ public class UsersResource {
         Usuario user_n=new Usuario(username, password, role);
         usersService.insertuser(user_n);
 
-        System.out.println("Si es aca");
+        System.out.println("Si es aca - Crear usuario");
 
         return null;
 

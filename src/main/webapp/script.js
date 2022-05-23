@@ -16,7 +16,7 @@ formulario.addEventListener("submit",function(e){
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     myHeaders.append("Access-Control-Allow-Origin", "*");
-    var newdata= fetch("./api/users/found1",{method: "POST",
+    var newdata= fetch("./api/users/found",{method: "POST",
         body: JSON.stringify(data),
         headers: myHeaders
     })
@@ -35,30 +35,11 @@ formulario.addEventListener("submit",function(e){
                 //window.location.href = "http://localhost:8080/Taller4-1.0-SNAPSHOT/comprador.html";
             }*/
 
-            if(Response.status == 200){  window.location.href="./index.html"; }
-        })
-
+       })
+    //(Response.status == 200){  window.location.href="./index.html"; }
+    console.log(["username"]);
 })
 
-var data = {
-    "username": document.getElementById("nombre").value,
-    "password": document.getElementById("contraseña").value,
-    "rol": document.getElementById("rol").value,
-
-
-    
-};
-
-//const myHeaders = new Headers();
-//fetch("")
-
-document.addEventListener('click', e=>{
-    if (e.target === $btnIniciarSesion || e.target === $btnRegistrase){
-        $IniciarSesion.classList.toggle('active');
-        $Registrarse.classList.toggle('active')
-    }
-
-})
 
 document.addEventListener('click', e=>{
     if (e.target === $btnIniciarSesion || e.target === $btnRegistrase){
