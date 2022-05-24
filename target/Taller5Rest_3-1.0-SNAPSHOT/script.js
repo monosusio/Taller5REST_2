@@ -4,6 +4,12 @@ const $btnIniciarSesion= document.querySelector('.Singboton'),
     $IniciarSesion = document.querySelector('.IniciarSesion');
 
 
+/*var alerta1 = document.getElementById("crear");
+alerta1.addEventListener("submit",function(e) {
+    alert("¡Se ha creado el usuario!");
+
+})*/
+
 var formulario = document.getElementById("login");
 formulario.addEventListener("submit",function(e){
     e.preventDefault();
@@ -11,7 +17,6 @@ formulario.addEventListener("submit",function(e){
     var data = {
         "username": document.getElementById("username").value,
         "password": document.getElementById("password").value,
-        "role": document.getElementById("role").value,
 
     };
 
@@ -37,11 +42,13 @@ formulario.addEventListener("submit",function(e){
 
             console.log("Este es el username" + dato["username"]);
 
+            console.log("Este es el rol que deberia coger el IF:  " + dato["role"])
+
             if(dato["role"] == "Artist"){
-                //window.location.href = "http://localhost:8080/Taller4-1.0-SNAPSHOT/Artista.html";
+                window.location.href = "http://localhost:8080/Taller5Rest_3-1.0-SNAPSHOT/artista.html";
                 console.log("Es Artist");
-            }else if(dato["role"] === "Custumer"){
-                //window.location.href = "http://localhost:8080/Taller4-1.0-SNAPSHOT/comprador.html";
+            }else if(dato["role"] === "Customer"){
+                window.location.href = "http://localhost:8080/Taller5Rest_3-1.0-SNAPSHOT/usuario.html";
                 console.log("Es Customer");
 
             }
